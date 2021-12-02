@@ -1,14 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 long long int getCount(char *buffer, size_t length)
 {
-    long long int index = 0;
-    // Get the last string
-    while (buffer[index] != ' ')
-    {
-        ++index;
-    }
-    ++index;
+    size_t index = 0;
+    // Get to next space
+    while (buffer[index++] != ' ');
+
+    // Resolve the number
     long long int acc = 0;
     for (long long int i = 0; i < length; ++i)
     {
@@ -21,8 +20,7 @@ long long int getCount(char *buffer, size_t length)
 int main()
 {
     long long int x = 0, y = 0, a = 0;
-    size_t read;
-    size_t len = 0;
+    size_t read = 0, len = 0;
     char *line = NULL;
 
     // Read the file line by line
@@ -43,14 +41,19 @@ int main()
         }
         else if (line[0] == 'd')
         {
-            // y += count;
+            // y += count; // Part I
             a += count;
         }
         else if (line[0] == 'u')
         {
-            // y -= count;
+            // y -= count; // Part I
             a -= count;
         }
+        else {
+            printf("Error: Unknown command\n");
+            break;
+        }
+        free(line);
         printf("X: %lld Y: %lld Aim: %lld\n", x, y, a);
     }
     printf("Final Sum: %lld\n", x * y);
