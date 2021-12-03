@@ -115,3 +115,7 @@ dmypy.json
 
 # Output files
 *.out
+
+# Ignore Java class files
+*.class
+.vscode/settings.json
